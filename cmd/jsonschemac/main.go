@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"gitlab.mi.hdm-stuttgart.de/smu/jsonschema"
+	"github.com/tfkhsr/jsonschema"
 )
 
 func main() {
