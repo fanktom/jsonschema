@@ -43,6 +43,33 @@ func TestWithDefinitions(t *testing.T) {
 	}
 }
 
+func TestSchemaWithArrayOfObjects(t *testing.T) {
+	idx, err := Parse([]byte(fixture.TestSchemaWithArrayOfObjects))
+	if err != nil {
+		panic(err)
+	}
+
+	table := map[string]string{
+		"#/definitions/movies":                       "array",
+		"#/definitions/movies/items":                 "object",
+		"#/definitions/movies/items/properties/id":   "string",
+		"#/definitions/movies/items/properties/name": "string",
+		"#/definitions/movies/items/properties/year": "integer",
+	}
+	for p, tp := range table {
+		s, ok := (*idx)[p]
+		if !ok {
+			t.Fatalf("index does not contain pointer %v", p)
+		}
+		if s.Type != tp {
+			t.Fatalf("type of schema with pointer %v is not %v but %v", p, tp, s.Type)
+		}
+		if s.Pointer != p {
+			t.Fatalf("pointer of schema should be %v but is %v", p, s.Pointer)
+		}
+	}
+}
+
 func TestDirectSchema(t *testing.T) {
 	idx, err := Parse([]byte(fixture.TestSchemaDirect))
 	if err != nil {

@@ -12,6 +12,7 @@ func TestFixtureUnmarshal(t *testing.T) {
 		"TestSchemaWithNestedDefinitions": TestSchemaWithNestedDefinitions,
 		"TestSchemaPrimitiveTypes":        TestSchemaPrimitiveTypes,
 		"TestSchemaRequiredValidation":    TestSchemaRequiredValidation,
+		"TestSchemaWithArrayOfObjects":    TestSchemaWithArrayOfObjects,
 	}
 	for k, v := range fs {
 		var o interface{}
